@@ -8,7 +8,7 @@ export const movies = [
     Thumbnail: tita,
     Scene: titanicS,
     Logo: movieLogo,
-    Name: "Tutanic",
+    Name: "Titanic",
     Description: "Description Description Description Description Description Description Description Description",
     Genre: "Romance, Drama",
     Actors: "Kate Winslet, Leonardo DiCapro",

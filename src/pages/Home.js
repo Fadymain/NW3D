@@ -82,12 +82,14 @@ const Home = () => {
                 <img src={selectedFilm.Scene} className="modalImg" alt='' />
                 <img src={selectedFilm.Logo} className="modalLogo" alt='' />
                 <div className="modalPlayButton">
-                  <Button
-                    icon="chevronRightX2"
-                    text="Play"
-                    theme="secondary"
-                    type="button"
-                  />
+                  <Link to="/player" state={selectedFilm.Movie}>
+                    <Button
+                      icon="chevronRightX2"
+                      text="Play"
+                      theme="secondary"
+                      type="button"
+                    />
+                  </Link>
                   <Button
                     icon="plus"
                     text="Add to My List"
@@ -105,11 +107,11 @@ const Home = () => {
                     {selectedFilm.Description}
                   </div>
                   <div className="detailedInfo">
-                      Genre:
-                      <span className="deets">{selectedFilm.Genre}</span>
-                      <br/>
-                      Actors:
-                      <span className="deets">{selectedFilm.Actors}</span>
+                    Genre:
+                    <span className="deets">{selectedFilm.Genre}</span>
+                    <br />
+                    Actors:
+                    <span className="deets">{selectedFilm.Actors}</span>
                   </div>
                 </div>
               </div>

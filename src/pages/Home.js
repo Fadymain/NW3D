@@ -49,9 +49,10 @@ const Home = () => {
             </div>
             <div className="thumbs">
               {movies &&
-                movies.map((e) => {
+                movies.map((e, id) => {
                   return (
                     <img
+                      key={id}
                       src={e.Thumnbnail}
                       className="thumbnail"
                       alt=''

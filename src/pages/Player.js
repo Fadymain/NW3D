@@ -2,6 +2,7 @@ import React from 'react';
 import "./Player.css";
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Icon } from 'web3uikit';
 
 const Player = () => {
 
@@ -9,14 +10,26 @@ const Player = () => {
 
   return (
     <>
-      <div>
-        <video autoPlay controls className="videoPlayeer">
+      <div className="playerPage">
+        <video autoPlay controls className="videoPlayer">
           <source
             src={currentlyPlaying}
             type="video/mp4"
           >
           </source>
         </video>
+
+        <div className="backHome">
+          <Link to="/">
+            <Icon 
+              className="backButton"
+              fill="rgba(255,255,255,0.25)"
+              size={60}
+              svg="arrowCircleLeft"
+              type="button"
+            />
+          </Link>
+        </div>
       </div>
     </>
   )

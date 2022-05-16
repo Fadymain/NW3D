@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import "./Home.css";
 import { Logo } from '../images/Netflix';
@@ -6,12 +6,34 @@ import { ConnectButton, Icon, Tab, TabList, Button, Modal, useNotification } fro
 import { movies } from '../helpers/library';
 import { useState } from 'react';
 import { useMoralis } from 'react-moralis';
+import { appId, serverUrl } from '../config';
+
 
 const Home = () => {
 
   const [visible, setVisible] = useState(false);
   const [selectedFilm, setSelectedFilm] = useState();
-  const { isAuthenticated } = useMoralis();
+  const [myMovies, setMyMovies] = useState();
+  const { isAuthenticated, Moralis, account } = useMoralis();
+
+  useEffect(() => {
+    async function fetchMyList() {
+      await Moralis.start({
+        serverUrl: serverUrl,
+        appId: appId
+      })
+      
+      const theList = await Moralis.Cloud.run("getMyList", {addrs: account})
+
+      const filteredA = movies.filter(function (e) {
+        return theList.indexOf(e.Name) > -1;
+      })
+
+      setMyMovies(filteredA);
+    }
+    fetchMyList();
+
+  }, [account])
 
   const dispatch = useNotification();
 
@@ -53,7 +75,7 @@ const Home = () => {
                   text="Add to My List"
                   theme="translucent"
                   type="button"
-                  onClick={() => console.log("isAuthenticated", isAuthenticated)}
+                  onClick={() => console.log("myMovies", myMovies)}
                 />
               </div>
             </div>

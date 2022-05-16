@@ -97,20 +97,41 @@ const Home = () => {
                 <img src={selectedFilm.Scene} className="modalImg" alt='' />
                 <img src={selectedFilm.Logo} className="modalLogo" alt='' />
                 <div className="modalPlayButton">
-                  <Link to="/player" state={selectedFilm.Movie}>
-                    <Button
-                      icon="chevronRightX2"
-                      text="Play"
-                      theme="secondary"
-                      type="button"
-                    />
-                  </Link>
-                  <Button
-                    icon="plus"
-                    text="Add to My List"
-                    theme="translucent"
-                    type="button"
-                  />
+                  {isAuthenticated ? (
+                    <>
+                      <Link to="/player" state={selectedFilm.Movie}>
+                        <Button
+                          icon="chevronRightX2"
+                          text="Play"
+                          theme="secondary"
+                          type="button"
+                        />
+                      </Link>
+                      <Button
+                        icon="plus"
+                        text="Add to My List"
+                        theme="translucent"
+                        type="button"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                          icon="chevronRightX2"
+                          text="Play"
+                          theme="secondary"
+                          type="button"
+                          onClick={handleNewNotification}
+                        />
+                      <Button
+                        icon="plus"
+                        text="Add to My List"
+                        theme="translucent"
+                        type="button"
+                        onClick={handleNewNotification}
+                      />
+                    </>
+                  )}
                 </div>
 
                 <div className="movieInfo">

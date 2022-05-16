@@ -22,8 +22,8 @@ const Home = () => {
         serverUrl: serverUrl,
         appId: appId
       })
-      
-      const theList = await Moralis.Cloud.run("getMyList", {addrs: account})
+
+      const theList = await Moralis.Cloud.run("getMyList", { addrs: account })
 
       const filteredA = movies.filter(function (e) {
         return theList.indexOf(e.Name) > -1;
@@ -104,7 +104,41 @@ const Home = () => {
 
           </Tab>
           <Tab tabKey={2} tabName={"Series"} isDisabled={true}></Tab>
-          <Tab tabKey={3} tabName={"MyList"}></Tab>
+          <Tab tabKey={3} tabName={"MyList"}>
+
+            <div className="ownListContent">
+              <div className="title">
+                Your Library
+              </div>
+              {myMovies && isAuthenticated ? (
+                <>
+                  <div className="ownThumbs">
+                    {
+                      myMovies.map((e, id) => {
+                        return (
+                          <img
+                            key={id}
+                            src={e.Thumnbnail}
+                            className="thumbnail"
+                            alt=''
+                            onClick={() => {
+                              setSelectedFilm(e);
+                              setVisible(true);
+                            }}
+                          />
+                        )
+                      })
+                    }
+                  </div>
+                </>
+              ) : (
+                <div className="ownThumbs">
+                  You Need To Authenticate To View Your Own List
+                </div>
+              )}
+            </div>
+
+          </Tab>
         </TabList>
         {selectedFilm && (
           <div className="modal">
@@ -139,12 +173,12 @@ const Home = () => {
                   ) : (
                     <>
                       <Button
-                          icon="chevronRightX2"
-                          text="Play"
-                          theme="secondary"
-                          type="button"
-                          onClick={handleNewNotification}
-                        />
+                        icon="chevronRightX2"
+                        text="Play"
+                        theme="secondary"
+                        type="button"
+                        onClick={handleNewNotification}
+                      />
                       <Button
                         icon="plus"
                         text="Add to My List"

@@ -46,6 +46,15 @@ const Home = () => {
     })
   }
 
+  const handleAddNotification = () => {
+    dispatch({
+      type: "Success",
+      message: "Movie Added To List",
+      title: "Success",
+      position: "topL"
+    })
+  }
+
 
   return (
     <>
@@ -168,6 +177,13 @@ const Home = () => {
                         text="Add to My List"
                         theme="translucent"
                         type="button"
+                        onClick={async () => {
+                          await Moralis.Cloud.run("updateMyList", {
+                            addrs: account,
+                            newFav: selectedFilm.Name,
+                          });
+                          handleAddNotification();
+                        }}
                       />
                     </>
                   ) : (

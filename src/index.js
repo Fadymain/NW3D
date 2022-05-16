@@ -6,12 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { MoralisProvider } from "react-moralis";
 import { NotificationProvider } from 'web3uikit';
+import {appId, serverUrl} from "./config"
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <MoralisProvider appId="xxxxx" serverUrl="xxxxx">
+    <MoralisProvider appId={appId} serverUrl={serverUrl}>
       <NotificationProvider>
       <BrowserRouter>
         <App />
